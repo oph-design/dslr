@@ -7,6 +7,7 @@ from utils import ft_count, ft_max, ft_mean, ft_min, ft_percentile, ft_std, load
 def transform(feature: np.ndarray) -> np.ndarray | None:
     if feature.dtype != np.int64 and feature.dtype != np.float64:
         return None
+    feature = feature[np.logical_not(np.isnan(feature))]
     return np.array(
         [
             ft_count(feature),
@@ -29,7 +30,7 @@ def ft_describe(data: pd.DataFrame):
         feature = transform(data.iloc[:, i])
         if feature is not None:
             df[columns[i]] = feature
-    print(df)
+    print(df.to_string(index=False))
 
 
 def main():
@@ -38,9 +39,8 @@ def main():
     data = load_data(sys.argv[1])
     if data is None:
         exit(1)
-    # print(data.describe())
-    print(data)
-    # ft_describe(data)
+    print(data.describe())
+    ft_describe(data)
 
 
 if __name__ == "__main__":
