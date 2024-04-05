@@ -18,39 +18,39 @@ def load_data(name: str) -> pd.DataFrame | None:
     return None
 
 
-def ft_count(feature: np.ndarray):
+def count(feature: np.ndarray):
     """returns array length"""
     return len(feature)
 
 
-def ft_mean(feature: np.ndarray):
+def mean(feature: np.ndarray):
     """returns array mean"""
-    return np.sum(feature) / ft_count(feature)
+    return np.sum(feature) / count(feature)
 
 
-def ft_std(feature: np.ndarray):
+def std(feature: np.ndarray):
     """returns array std deviation"""
-    dev = feature - ft_mean(feature)
+    dev = feature - mean(feature)
     sqsum = np.sum(np.power(dev, 2))
-    return math.sqrt(sqsum / ft_count(feature))
+    return math.sqrt(sqsum / count(feature))
 
 
-def ft_min(feature: np.ndarray):
+def min(feature: np.ndarray):
     """returns min value of array"""
     sorted = np.sort(feature)
     return sorted[0]
 
 
-def ft_max(feature: np.ndarray):
+def max(feature: np.ndarray):
     """returns max value of array"""
     sorted = np.sort(feature)
-    return sorted[ft_count(feature) - 1]
+    return sorted[count(feature) - 1]
 
 
-def ft_percentile(feature: np.ndarray, percentile: float):
+def percentile(feature: np.ndarray, percentile: float):
     """returns value at percentile"""
     if percentile < 0.0 and percentile > 1.0:
         raise Exception("percentile not between 0 and 1")
     sorted = np.sort(feature)
-    pos = int(ft_count(sorted) * percentile)
+    pos = int(count(sorted) * percentile)
     return sorted[pos]

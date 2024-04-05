@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 import pandas as pd
-from utils import ft_count, ft_max, ft_mean, ft_min, ft_percentile, ft_std, load_data
+import libft as ft
 
 
 def transform(feature: np.ndarray) -> np.ndarray | None:
@@ -10,14 +10,14 @@ def transform(feature: np.ndarray) -> np.ndarray | None:
     feature = feature[np.logical_not(np.isnan(feature))]
     return np.array(
         [
-            ft_count(feature),
-            ft_mean(feature),
-            ft_std(feature),
-            ft_min(feature),
-            ft_percentile(feature, 0.25),
-            ft_percentile(feature, 0.5),
-            ft_percentile(feature, 0.75),
-            ft_max(feature),
+            ft.count(feature),
+            ft.mean(feature),
+            ft.std(feature),
+            ft.min(feature),
+            ft.percentile(feature, 0.25),
+            ft.percentile(feature, 0.5),
+            ft.percentile(feature, 0.75),
+            ft.max(feature),
         ]
     )
 
@@ -36,7 +36,7 @@ def ft_describe(data: pd.DataFrame):
 def main():
     if len(sys.argv) < 2:
         exit(1)
-    data = load_data(sys.argv[1])
+    data = ft.load_data(sys.argv[1])
     if data is None:
         exit(1)
     print(data.describe())
