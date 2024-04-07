@@ -27,7 +27,7 @@ def ft_describe(data: pd.DataFrame):
     df = pd.DataFrame({"": rows})
     columns = list(data.columns)
     for i in range(data.shape[1]):
-        feature = transform(data.iloc[:, i])
+        feature = transform(np.array(data.iloc[:, i]))
         if feature is not None:
             df[columns[i]] = feature
     print(df.to_string(index=False))
@@ -39,7 +39,6 @@ def main():
     data = ft.load_data(sys.argv[1])
     if data is None:
         exit(1)
-    print(data.describe())
     ft_describe(data)
 
 
