@@ -13,7 +13,9 @@ def main():
     data = load_data(sys.argv[1])
     if data is None:
         exit(1)
-    pair = sns.pairplot(data.iloc[:, 6:], diag_kws={"bins": 10})
+    pair = sns.pairplot(
+        data, hue="Hogwarts House", diag_kind="hist", plot_kws=dict(linewidth=0.1)
+    )
     pair.figure.set_size_inches(15, 13)
     plt.show()
 
