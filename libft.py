@@ -1,9 +1,12 @@
 import pandas as pd
 import numpy as np
 import math
+import sys
 
+RED = "\033[91m"
+DEF = "\033[0m"
 
-def check_input(argv: list, argc: int) -> pd.DataFrame:
+def checker(argv: list, argc: int) -> pd.DataFrame:
     if len(argv) < 2 and len(argv) > argc + 2:
         raise Exception("wrong number of Arguments provided")
     data = pd.read_csv(argv[1])
@@ -18,6 +21,15 @@ def check_input(argv: list, argc: int) -> pd.DataFrame:
         except ValueError:
             raise Exception("Feature(s) not found in data")
     return data
+
+
+def check_input(argv: list, argc: int) -> pd.DataFrame:
+    try:
+        return checker(argv, argc)
+    except Exception as e:
+        print(f"{RED}Program terminated because of Exception:\n{str(e)}{DEF}",
+              file=sys.stderr)
+        exit(1)
 
 
 def count(feature: np.ndarray):
