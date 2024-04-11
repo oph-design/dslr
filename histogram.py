@@ -1,4 +1,3 @@
-from libft import load_data
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -35,9 +34,7 @@ def draw_histogram(data: pd.DataFrame, feature: str, ax):
 
 
 def main():
-    data = load_data(sys.argv[1])
-    if data is None:
-        exit(1)
+    data = ft.check_input(sys.argv, 1)
     features = list(data.columns[6:])
     size = len(features)
     columns = math.ceil(math.sqrt(size))

@@ -34,9 +34,7 @@ def ft_describe(data: pd.DataFrame):
 
 
 def main():
-    if len(sys.argv) < 2:
-        exit(1)
-    data = ft.load_data(sys.argv[1])
+    data = ft.check_input(sys.argv, 0)
     if data is None:
         exit(1)
     ft_describe(data)

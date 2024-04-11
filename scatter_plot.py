@@ -1,4 +1,4 @@
-from libft import load_data
+from libft import check_input
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
@@ -18,9 +18,7 @@ def draw_scatterplot(data: pd.DataFrame, feat: str, comp: str, axes):
 
 
 def main():
-    data = load_data(sys.argv[1])
-    if data is None:
-        exit(1)
+    data = check_input(sys.argv, 2)
     n = 1
     features = list(data.columns[6:])
     compare = features[1:]

@@ -1,5 +1,5 @@
 import seaborn as sns
-from libft import load_data
+from libft import check_input
 import matplotlib.pyplot as plt
 import sys
 
@@ -8,9 +8,7 @@ plt.rcParams.update({"font.size": 6})
 
 
 def main():
-    data = load_data(sys.argv[1])
-    if data is None:
-        exit(1)
+    data = check_input(sys.argv, 0)
     pair = sns.pairplot(
         data, hue="Hogwarts House", diag_kind="hist", plot_kws=dict(linewidth=0.1)
     )

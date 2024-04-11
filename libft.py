@@ -3,19 +3,21 @@ import numpy as np
 import math
 
 
-def load_data(name: str) -> pd.DataFrame | None:
-    """secures the read data fits the requirements"""
-    try:
-        return pd.read_csv(name)
-    except FileNotFoundError:
-        print("Read CSV: File not found.")
-    except pd.errors.EmptyDataError:
-        print("Read CSV: No data")
-    except pd.errors.ParserError:
-        print("Read CSV: Parse error")
-    except BaseException:
-        print("Read CSV: unexpected error")
-    return None
+def check_input(argv: list, argc: int) -> pd.DataFrame:
+    if len(argv) < 2 and len(argv) > argc + 2:
+        raise Exception("wrong number of Arguments provided")
+    data = pd.read_csv(argv[1])
+    columns = list(data.columns)
+    if len(columns) < 6 + argc:
+        raise Exception("CSV has not enough features")
+    for i in range(argc):
+        if i + 2 >= len(argv):
+            break
+        try:
+            columns.index(argv[i + 2])
+        except ValueError:
+            raise Exception("Feature(s) not found in data")
+    return data
 
 
 def count(feature: np.ndarray):
