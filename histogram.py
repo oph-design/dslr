@@ -21,7 +21,6 @@ def draw_histogram(data: pd.DataFrame, feature: str, ax):
     houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
     for i in range(len(houses)):
         arr = data.loc[data["Hogwarts House"] == houses[i], feature]
-        arr = arr[np.logical_not(np.isnan(arr))]
         ax.hist(
             arr,
             bins=nbins,
