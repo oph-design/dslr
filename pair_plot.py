@@ -1,5 +1,3 @@
-import pandas as pd
-import numpy as np
 import seaborn as sns
 from libft import load_data
 import matplotlib.pyplot as plt
