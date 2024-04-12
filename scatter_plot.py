@@ -18,6 +18,8 @@ def draw_scatterplot(feat: str, comp: str, axes):
         y = data.loc[data["Hogwarts House"] == houses[i], feat]
         x = data.loc[data["Hogwarts House"] == houses[i], comp]
         axes.scatter(x, y, marker=".", color=colors[i], label=houses[i])
+    if n == 1:
+        plt.legend(loc="upper left")
 
 
 def draw_row(compare: list, feature: str, fig):
