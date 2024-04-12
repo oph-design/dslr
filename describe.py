@@ -8,6 +8,8 @@ def transform(feature: np.ndarray) -> np.ndarray | None:
     if feature.dtype != np.int64 and feature.dtype != np.float64:
         return None
     feature = feature[np.logical_not(np.isnan(feature))]
+    if ft.count(feature) == 0:
+        return None
     return np.array(
         [
             ft.count(feature),
@@ -35,8 +37,6 @@ def ft_describe(data: pd.DataFrame):
 
 def main():
     data = ft.check_input(sys.argv, 0)
-    if data is None:
-        exit(1)
     ft_describe(data)
 
 

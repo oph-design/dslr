@@ -12,9 +12,9 @@ def main():
     pair = sns.pairplot(
         data,
         hue="Hogwarts House",
-        diag_kind="hist",
+        # diag_kind="hist",
         plot_kws=dict(linewidth=0.1),
-        diag_kws=dict(bins=10),
+        # diag_kws=dict(bins=10),
         corner=True,
     )
     pair.figure.set_size_inches(15, 13)
