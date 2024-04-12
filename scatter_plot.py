@@ -21,7 +21,7 @@ def draw_scatterplot(feat: str, comp: str, axes):
 
 
 def draw_row(compare: list, feature: str, fig):
-    global n, size
+    global n
     for i, comp in enumerate(compare):
         rowlen = len(compare)
         axes = fig.add_subplot(rows, columns, n)
@@ -51,10 +51,10 @@ def main():
         plt.xlabel(sys.argv[3])
         plt.ylabel(sys.argv[2])
     elif len(sys.argv) == 3:
-        rows = math.floor(math.sqrt(columns))
-        columns = math.ceil(columns / rows)
-        fig = plt.figure(figsize=(4 * columns, 2 * rows))
         features.remove(sys.argv[2])
+        rows = math.floor(math.sqrt(len(features)))
+        columns = math.ceil(len(features) / rows)
+        fig = plt.figure(figsize=(4 * columns, 2 * rows))
         draw_row(features, sys.argv[2], fig)
     else:
         draw_all(features)
