@@ -4,11 +4,10 @@ import matplotlib.pyplot as plt
 import sys
 
 
-plt.rcParams.update({"font.size": 6})
-
-
-def main():
+def main() -> None:
+    """main function"""
     data = check_input(sys.argv, 0)
+    plt.rcParams.update({"font.size": 6})
     pair = sns.pairplot(
         data,
         hue="Hogwarts House",

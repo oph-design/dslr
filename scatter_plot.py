@@ -5,6 +5,7 @@ import sys
 import math
 
 
+houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
 colors = ["red", "orange", "blue", "green"]
 data = pd.DataFrame([])
 columns = 0
@@ -12,8 +13,8 @@ rows = 0
 n = 1
 
 
-def draw_scatterplot(feat: str, comp: str, axes):
-    houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
+def draw_scatterplot(feat: str, comp: str, axes) -> None:
+    """draws scatter plot between 2 feature"""
     for i in range(len(houses)):
         y = data.loc[data["Hogwarts House"] == houses[i], feat]
         x = data.loc[data["Hogwarts House"] == houses[i], comp]
@@ -22,7 +23,8 @@ def draw_scatterplot(feat: str, comp: str, axes):
         plt.legend(loc="upper left")
 
 
-def draw_row(compare: list, feature: str, fig):
+def draw_row(compare: list, feature: str, fig) -> None:
+    """loops through all features once"""
     global n
     for i, comp in enumerate(compare):
         rowlen = len(compare)
@@ -34,7 +36,8 @@ def draw_row(compare: list, feature: str, fig):
     fig.tight_layout()
 
 
-def draw_all(features: list):
+def draw_all(features: list) -> None:
+    """loops through all features for every feature"""
     plt.rcParams.update({"font.size": 6})
     compare = features[1:]
     fig = plt.figure(figsize=(3 * columns, 1 * rows))
@@ -43,7 +46,8 @@ def draw_all(features: list):
         compare = compare[1:]
 
 
-def main():
+def main() -> None:
+    """main function"""
     global data, rows, columns
     data = check_input(sys.argv, 2)
     features = list(data.columns[6:])

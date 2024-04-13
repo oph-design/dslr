@@ -5,6 +5,7 @@ import libft as ft
 
 
 def transform(feature: np.ndarray) -> np.ndarray | None:
+    """returns array with data values"""
     if feature.dtype != np.int64 and feature.dtype != np.float64:
         return None
     feature = feature[np.logical_not(np.isnan(feature))]
@@ -24,7 +25,8 @@ def transform(feature: np.ndarray) -> np.ndarray | None:
     )
 
 
-def ft_describe(data: pd.DataFrame):
+def ft_describe(data: pd.DataFrame) -> None:
+    """prints description grid"""
     rows = ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"]
     df = pd.DataFrame({"": rows})
     columns = list(data.columns)
@@ -35,7 +37,8 @@ def ft_describe(data: pd.DataFrame):
     print(df.to_string(index=False))
 
 
-def main():
+def main() -> None:
+    """main function"""
     data = ft.check_input(sys.argv, 0)
     ft_describe(data)
 
