@@ -26,9 +26,8 @@ def load_coefs() -> pd.DataFrame:
 
 
 def calculate_probs(data, coefs):
-    scores = np.dot(data, coefs.T)
-    exp_scores = np.exp(scores - np.max(scores, axis=1, keepdims=True))
-    probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True)
+    scores = np.dot(data, coefs)
+    probs = 1 / (1 + np.exp(scores * -1))
     return probs
 
 
@@ -36,7 +35,7 @@ def write_result(probs):
     file = open("houses.csv", "w")
     file.write("Index,Hogwarts House\n")
     for index, prob in enumerate(probs):
-        house = houses[prob.index(ft.max(prob))]
+        house = houses[np.argmax(prob)]
         file.write(f"{index},{house}\n")
     file.close()
 
