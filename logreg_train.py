@@ -26,13 +26,9 @@ def get_features(data: pd.DataFrame):
     ]
 
 
-def remove_nans(data: pd.DataFrame) -> pd.DataFrame:
-    nan_indices = data.iloc[:, -5:].isnull().any(axis=1)
-    return pd.DataFrame(data[~nan_indices])
-
-
 def main():
     data = get_features(check_input(sys.argv, 0))
+    data = data.dropna()
     coefs = pd.DataFrame(
         columns=[
             "Gryffindor",
@@ -41,11 +37,12 @@ def main():
             "Hufflepuff",
         ]
     )
+    model = GD(label_data(data, "Gryffindor"))
     for house in houses:
-        model = GD(remove_nans(label_data(data, house)))
+        model._reset(label_data(data, house))
         model._train()
         coefs[house] = model._getCoefs()
-    coefs.to_csv("coefs.csv")
+    coefs.to_csv("coefs.csv", index=False)
 
 
 if __name__ == "__main__":
