@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 houses.csv
+coefs.csv
 
 # C extensions
 *.so

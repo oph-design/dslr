@@ -12,7 +12,7 @@ def load_coefs() -> pd.DataFrame:
     try:
         coefs = pd.read_csv("coefs.csv")
         headers = list(coefs)
-        if len(headers) != 4 or len(coefs.iloc[:, 1]) != 5:
+        if len(headers) != 4 or len(coefs.iloc[:, 1]) != 6:
             raise Exception("Wrong Format")
         return coefs
     except Exception:
@@ -26,7 +26,7 @@ def load_coefs() -> pd.DataFrame:
 
 
 def calculate_probs(data, coefs):
-    scores = np.dot(data, coefs)
+    scores = coefs[0] + np.dot(data, coefs[1:])
     probs = 1 / (1 + np.exp(scores * -1))
     return probs
 

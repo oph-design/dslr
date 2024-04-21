@@ -30,7 +30,6 @@ def get_features(data: pd.DataFrame):
 def main():
     data = get_features(check_input(sys.argv, 0))
     data = data.dropna()
-    print(data)
     coefs = pd.DataFrame(
         columns=[
             "Gryffindor",

@@ -13,18 +13,18 @@ class GradientDescent:
         self.n = len(self.y)
         self.l = 0.01
         self.epochs = 1000
-        self._normalize()
+        # self._normalize()
 
     def _reset(self, data: pd.DataFrame):
         self.c = 0.0
         self.m = np.array([0.0, 0.0, 0.0, 0.0, 0.0], dtype=np.float128)
         self.y = np.array(data.iloc[:, 0], dtype=np.float128)
 
-    def _normalize(self):
-        for i in range(len(self.x)):
-            mean = ft.mean(self.x[i])
-            std = ft.std(self.x[i])
-            self.x[i] = (self.x[i] - mean) / std
+    # def _normalize(self):
+    #     for i in range(len(self.x)):
+    #         mean = ft.mean(self.x[i])
+    #         std = ft.std(self.x[i])
+    #         self.x[i] = (self.x[i] - mean) / std
 
     def _predict(self):
         predictions = self.m * self.x
