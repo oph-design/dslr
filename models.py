@@ -1,14 +1,15 @@
 import pandas as pd
 import numpy as np
+from time import sleep
 
 
 class GradientDescent:
 
     def __init__(self, data: pd.DataFrame):
         self.c = 0
-        self.m = np.array([0, 0, 0, 0, 0])
-        self.y = data.iloc[:, 1]
-        self.x = data.iloc[:, 1:6]
+        self.m = np.array([0.0, 0.0, 0.0, 0.0, 0.0])
+        self.y = np.array(data.iloc[:, 1])
+        self.x = np.array(data.iloc[:, 1:6])
         self.n = len(self.y)
         self.l = 0.01
         self.epochs = 1000
@@ -20,8 +21,8 @@ class GradientDescent:
         return 1 / (1 + np.exp(predictions * -1))
 
     def _updateSlopes(self, prediction):
-        for j in range(len(self.m)):
-            cost = (1 / self.n) * np.sum((prediction - self.y) * self.x[j])
+        for j in range(self.n):
+            cost = (1 / self.n) * np.sum((prediction - self.y) * self.x[:, j])
             self.m[j] = self.m[j] - self.l * cost
 
     def _train(self):

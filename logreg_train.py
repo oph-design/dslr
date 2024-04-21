@@ -26,8 +26,9 @@ def get_features(data: pd.DataFrame):
     ]
 
 
-def perform_regression(data: pd.DataFrame) -> np.ndarray:
-    return np.array([])
+def remove_nans(data: pd.DataFrame) -> pd.DataFrame:
+    nan_indices = data.iloc[:, -5:].isnull().any(axis=1)
+    return pd.DataFrame(data[~nan_indices])
 
 
 def main():
@@ -40,10 +41,11 @@ def main():
             "Hufflepuff",
         ]
     )
-    model = GD(label_data(data, "Gryffindor"))
-    # for house in houses:
-    #     coefs[house] = perform_regression(label_data(data, house))
-    # coefs.to_csv("coefs.csv")
+    for house in houses:
+        model = GD(remove_nans(label_data(data, house)))
+        model._train()
+        coefs[house] = model._getCoefs()
+    coefs.to_csv("coefs.csv")
 
 
 if __name__ == "__main__":
