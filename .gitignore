@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 houses.csv
 coefs.csv
+test.csv
 
 # C extensions
 *.so

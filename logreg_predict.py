@@ -5,7 +5,7 @@ import sys
 
 RED = "\033[91m"
 DEF = "\033[0m"
-houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
+houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
 
 
 def load_coefs() -> pd.DataFrame:
