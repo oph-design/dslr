@@ -8,7 +8,7 @@ class GradientDescent:
     def __init__(self, data: pd.DataFrame):
         self.c = 0.0
         self.m = np.array([0.0, 0.0, 0.0, 0.0, 0.0], dtype=np.float128)
-        self.y = np.array(data.iloc[:, 1], dtype=np.float128)
+        self.y = np.array(data.iloc[:, 0], dtype=np.float128)
         self.x = np.array(data.iloc[:, 1:6], dtype=np.float128)
         self.n = len(self.y)
         self.l = 0.01
@@ -18,7 +18,7 @@ class GradientDescent:
     def _reset(self, data: pd.DataFrame):
         self.c = 0.0
         self.m = np.array([0.0, 0.0, 0.0, 0.0, 0.0], dtype=np.float128)
-        self.y = np.array(data.iloc[:, 1], dtype=np.float128)
+        self.y = np.array(data.iloc[:, 0], dtype=np.float128)
 
     def _normalize(self):
         for i in range(len(self.x)):

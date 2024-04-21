@@ -8,8 +8,9 @@ houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
 
 
 def label_data(data: pd.DataFrame, label: str) -> pd.DataFrame:
-    data["Hogwarts House"] = (data["Hogwarts House"] == label).astype(int)
-    return data
+    res = data.copy()
+    res["Hogwarts House"] = (res["Hogwarts House"] == label).astype(int)
+    return res
 
 
 def get_features(data: pd.DataFrame):
@@ -29,6 +30,7 @@ def get_features(data: pd.DataFrame):
 def main():
     data = get_features(check_input(sys.argv, 0))
     data = data.dropna()
+    print(data)
     coefs = pd.DataFrame(
         columns=[
             "Gryffindor",
