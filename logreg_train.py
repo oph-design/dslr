@@ -5,6 +5,7 @@ from libft import check_input
 import sys
 
 houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
+features = ["Flying", "Divination", "Muggle Studies", "Charms"]
 
 
 def label_data(data: pd.DataFrame, label: str) -> pd.DataFrame:
@@ -18,10 +19,9 @@ def get_features(data: pd.DataFrame):
         :,
         [
             "Hogwarts House",
-            "Astronomy",
-            "Herbology",
-            "Defense Against the Dark Arts",
-            "Ancient Runes",
+            "Flying",
+            "Divination",
+            "Muggle Studies",
             "Charms",
         ],
     ]
@@ -38,9 +38,8 @@ def main():
             "Hufflepuff",
         ]
     )
-    model = GD(label_data(data, "Gryffindor"))
-    for house in houses:
-        model._reset(label_data(data, house))
+    for house, feature in zip(houses, features):
+        model = GD(label_data(data, house), feature)
         model._train()
         coefs[house] = model._getCoefs()
     coefs.to_csv("coefs.csv", index=False)

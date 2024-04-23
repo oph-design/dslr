@@ -3,6 +3,13 @@ from libft import check_input
 import matplotlib.pyplot as plt
 import sys
 
+hue_colors = {
+    "Gryffindor": "red",
+    "Slytherin": "green",
+    "Ravenclaw": "blue",
+    "Hufflepuff": "orange",
+}
+
 
 def main() -> None:
     """main function"""
@@ -11,6 +18,7 @@ def main() -> None:
     pair = sns.pairplot(
         data,
         hue="Hogwarts House",
+        palette=hue_colors,
         plot_kws=dict(linewidth=0.1),
         corner=True,
     )
