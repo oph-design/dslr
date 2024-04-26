@@ -4,8 +4,17 @@ from models import GradientDescent as GD
 from libft import check_input
 import sys
 
-houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
-features = ["Flying", "Divination", "Muggle Studies", "Charms"]
+houses = {
+    "Gryffindor": ["Hogwarts House", "Flying", "Transfiguration", "History of Magic"],
+    "Slytherin": ["Hogwarts House", "Divination"],
+    "Ravenclaw": ["Hogwarts House", "Muggle Studies", "Charms"],
+    "Hufflepuff": [
+        "Hogwarts House",
+        "Ancient Runes",
+        "Defense Against the Dark Arts",
+        "Herbology",
+    ],
+}
 
 
 def label_data(data: pd.DataFrame, label: str) -> pd.DataFrame:
@@ -14,21 +23,8 @@ def label_data(data: pd.DataFrame, label: str) -> pd.DataFrame:
     return res
 
 
-def get_features(data: pd.DataFrame):
-    return data.loc[
-        :,
-        [
-            "Hogwarts House",
-            "Flying",
-            "Divination",
-            "Muggle Studies",
-            "Charms",
-        ],
-    ]
-
-
 def main():
-    data = get_features(check_input(sys.argv, 0))
+    data = check_input(sys.argv, 0)
     data = data.dropna()
     coefs = pd.DataFrame(
         columns=[
@@ -38,9 +34,11 @@ def main():
             "Hufflepuff",
         ]
     )
-    for house, feature in zip(houses, features):
-        model = GD(label_data(data, house), feature)
+    for house, subjects in houses.items():
+        features = data.loc[:, subjects]
+        model = GD(label_data(features, house))
         model._train()
+        print(model._getCoefs())
         coefs[house] = model._getCoefs()
     coefs.to_csv("coefs.csv", index=False)
 
