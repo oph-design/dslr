@@ -28,6 +28,6 @@ class GradientDescent:
 
     def _getCoefs(self) -> np.ndarray:
         res = np.insert(self.m, 0, self.c)
-        while len(res) != 4:
-            res = np.insert(res, len(res), np.nan)
+        # while len(res) != 4:
+        #     res = np.insert(res, len(res), np.nan)
         return res
