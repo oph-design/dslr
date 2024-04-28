@@ -3,8 +3,9 @@ import libft as ft
 import pandas as pd
 import sys
 
-RED = "\033[91m"
+GREEN = "\033[92m"
 DEF = "\033[0m"
+
 houses = {
     "Gryffindor": ["Flying", "Transfiguration", "History of Magic"],
     "Slytherin": ["Divination"],
@@ -48,11 +49,11 @@ def calculate_probs(data, coefs):
 def write_result(probs):
     file = open("houses.csv", "w")
     file.write("Index,Hogwarts House\n")
-    print(probs)
     for index, prob in enumerate(probs):
         house = list(houses.keys())[np.argmax(prob)]
         file.write(f"{index},{house}\n")
     file.close()
+    print(f'{GREEN}Prediction Complete! Data written in "houses.csv"{DEF}')
 
 
 def main():

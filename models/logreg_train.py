@@ -3,6 +3,9 @@ from models import GradientDescent as GD
 from libft import check_input
 import sys
 
+GREEN = "\033[92m"
+DEF = "\033[0m"
+
 houses = {
     "Gryffindor": ["Hogwarts House", "Flying", "Transfiguration", "History of Magic"],
     "Slytherin": ["Hogwarts House", "Divination"],
@@ -39,10 +42,11 @@ def main():
     )
     for house, subjects in houses.items():
         features = label_data(data.loc[:, subjects], house)
-        model = GD(features)
+        model = GD(features, house)
         model._train()
         coefs[house] = model._getCoefs()
     coefs.to_csv("coefs.csv", index=False)
+    print(f'{GREEN}Training Complete! Data written in "coefs.csv"{DEF}')
 
 
 if __name__ == "__main__":

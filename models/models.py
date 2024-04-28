@@ -1,10 +1,12 @@
 import pandas as pd
 import numpy as np
+from tqdm import tqdm
 
 
 class GradientDescent:
 
-    def __init__(self, data: pd.DataFrame):
+    def __init__(self, data: pd.DataFrame, house: str):
+        self.house = house
         self.c = 0.0
         self.y = np.array(data.iloc[:, 0], dtype=np.float128)
         self.x = np.array(data.iloc[:, 1:], dtype=np.float128)
@@ -18,7 +20,7 @@ class GradientDescent:
         return 1 / (1 + np.exp(scores * -1))
 
     def _train(self):
-        for i in range(self.epochs):
+        for i in tqdm(range(self.epochs), desc=self.house, ncols=100, ascii=True):
             predict = self._predict()
             cost_c = (1 / self.n) * np.sum(predict - self.y)
             self.c = self.c - self.l * cost_c
