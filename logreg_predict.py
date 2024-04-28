@@ -24,16 +24,14 @@ def load_coefs() -> pd.DataFrame:
         if len(headers) != 4:
             raise Exception("Wrong Format")
         return coefs
-    except Exception as e:
-        # coefs = {
-        #     "Gryffindor": [0.0, 0.0, 0.0, 0.0],
-        #     "Slytherin": [0.0, 0.0],
-        #     "Ravenclaw": [0.0, 0.0, 0.0],
-        #     "Hufflepuff": [0.0, 0.0, 0.0, 0.0],
-        # }
-        print(f"{e}")
-        exit(1)
-        # return pd.DataFrame(coefs)
+    except Exception:
+        coefs = {
+            "Gryffindor": [0.0, 0.0, 0.0, 0.0],
+            "Slytherin": [0.0, 0.0],
+            "Ravenclaw": [0.0, 0.0, 0.0],
+            "Hufflepuff": [0.0, 0.0, 0.0, 0.0],
+        }
+        return pd.DataFrame(coefs)
 
 
 def calculate_probs(data, coefs):
@@ -58,7 +56,7 @@ def write_result(probs):
 
 
 def main():
-    data = ft.check_input(sys.argv, 0)
+    data = ft.check_input(sys.argv, 0).dropna()
     coefs = load_coefs()
     probs = calculate_probs(data, coefs)
     write_result(probs.T)

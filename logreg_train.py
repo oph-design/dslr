@@ -40,8 +40,6 @@ def main():
         model._train()
         coefs[house] = model._getCoefs()
     coefs.to_csv("coefs.csv", index=False)
-    plt.tight_layout()
-    plt.show()
 
 
 if __name__ == "__main__":
