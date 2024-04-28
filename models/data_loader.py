@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import math
 import sys
 
 
@@ -8,42 +7,21 @@ RED = "\033[91m"
 DEF = "\033[0m"
 
 
-def count(feature: np.ndarray):
-    """returns array length"""
-    return len(feature)
-
-
-def mean(feature: np.ndarray):
-    """returns array mean"""
-    return np.sum(feature) / count(feature)
-
-
-def std(feature: np.ndarray):
-    """returns array std deviation"""
-    dev = feature - mean(feature)
-    sqsum = np.sum(np.power(dev, 2))
-    return math.sqrt(sqsum / count(feature))
-
-
-def min(feature: np.ndarray):
-    """returns min value of array"""
-    sorted = np.sort(feature)
-    return sorted[0]
-
-
-def max(feature: np.ndarray):
-    """returns max value of array"""
-    sorted = np.sort(feature)
-    return sorted[count(feature) - 1]
-
-
-def percentile(feature: np.ndarray, percentile: float):
-    """returns value at percentile"""
-    if percentile < 0.0 and percentile > 1.0:
-        raise Exception("percentile not between 0 and 1")
-    sorted = np.sort(feature)
-    pos = int(count(sorted) * percentile)
-    return sorted[pos]
+def load_coefs() -> pd.DataFrame:
+    try:
+        coefs = pd.read_csv("coefs.csv")
+        headers = list(coefs)
+        if len(headers) != 4:
+            raise Exception("Wrong Format")
+        return coefs
+    except Exception:
+        coefs = {
+            "Gryffindor": [0.0, 0.0, 0.0, 0.0],
+            "Slytherin": [0.0, 0.0, np.nan, np.nan],
+            "Ravenclaw": [0.0, 0.0, 0.0, np.nan],
+            "Hufflepuff": [0.0, 0.0, 0.0, 0.0],
+        }
+        return pd.DataFrame(coefs)
 
 
 def checker(argv: list, argc: int) -> pd.DataFrame:

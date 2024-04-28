@@ -1,6 +1,5 @@
 import numpy as np
-import libft as ft
-import pandas as pd
+from data_loader import check_input, load_coefs
 import sys
 
 GREEN = "\033[92m"
@@ -16,23 +15,6 @@ houses = {
         "Herbology",
     ],
 }
-
-
-def load_coefs() -> pd.DataFrame:
-    try:
-        coefs = pd.read_csv("coefs.csv")
-        headers = list(coefs)
-        if len(headers) != 4:
-            raise Exception("Wrong Format")
-        return coefs
-    except Exception:
-        coefs = {
-            "Gryffindor": [0.0, 0.0, 0.0, 0.0],
-            "Slytherin": [0.0, 0.0, np.nan, np.nan],
-            "Ravenclaw": [0.0, 0.0, 0.0, np.nan],
-            "Hufflepuff": [0.0, 0.0, 0.0, 0.0],
-        }
-        return pd.DataFrame(coefs)
 
 
 def calculate_probs(data, coefs):
@@ -57,7 +39,7 @@ def write_result(probs):
 
 
 def main():
-    data = ft.check_input(sys.argv, 0)
+    data = check_input(sys.argv, 0)
     data = data.fillna(0)
     coefs = load_coefs()
     probs = calculate_probs(data, coefs)

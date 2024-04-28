@@ -1,12 +1,9 @@
-from libft import check_input
+import libft as ft
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 import math
 
-
-houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
-colors = ["red", "orange", "blue", "green"]
 data = pd.DataFrame([])
 columns = 0
 rows = 0
@@ -15,10 +12,10 @@ n = 1
 
 def draw_scatterplot(feat: str, comp: str, axes) -> None:
     """draws scatter plot between 2 feature"""
-    for i in range(len(houses)):
-        y = data.loc[data["Hogwarts House"] == houses[i], feat]
-        x = data.loc[data["Hogwarts House"] == houses[i], comp]
-        axes.scatter(x, y, marker=".", color=colors[i], label=houses[i])
+    for i in range(len(ft.houses)):
+        y = data.loc[data["Hogwarts House"] == ft.houses[i], feat]
+        x = data.loc[data["Hogwarts House"] == ft.houses[i], comp]
+        axes.scatter(x, y, marker=".", color=ft.colors[i], label=ft.houses[i])
     if n == 1:
         plt.legend(loc="upper left")
 
@@ -49,7 +46,7 @@ def draw_all(features: list) -> None:
 def main() -> None:
     """main function"""
     global data, rows, columns
-    data = check_input(sys.argv, 2)
+    data = ft.check_input(sys.argv, 2)
     features = list(data.columns[6:])
     rows = columns = len(features)
     if len(sys.argv) == 4:

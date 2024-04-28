@@ -1,6 +1,6 @@
 import pandas as pd
 from models import GradientDescent as GD
-from libft import check_input
+from data_loader import check_input
 import sys
 
 GREEN = "\033[92m"

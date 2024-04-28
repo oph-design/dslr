@@ -7,6 +7,9 @@ import sys
 RED = "\033[91m"
 DEF = "\033[0m"
 
+houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
+colors = ["red", "orange", "blue", "green"]
+
 
 def count(feature: np.ndarray):
     """returns array length"""

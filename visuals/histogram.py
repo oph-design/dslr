@@ -5,9 +5,6 @@ import sys
 import math
 import libft as ft
 
-houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
-colors = ["red", "orange", "blue", "green"]
-
 
 def calc_bins(arr) -> np.ndarray:
     """calculates the number of bars"""
@@ -19,15 +16,15 @@ def calc_bins(arr) -> np.ndarray:
 def draw_histogram(data: pd.DataFrame, feature: str, axes) -> None:
     """draws a histogram for one feature"""
     nbins = calc_bins(data[feature].to_numpy())
-    for i in range(len(houses)):
-        arr = data.loc[data["Hogwarts House"] == houses[i], feature]
+    for i in range(len(ft.houses)):
+        arr = data.loc[data["Hogwarts House"] == ft.houses[i], feature]
         axes.hist(
             arr,
             bins=nbins,
-            color=colors[i],
-            label=houses[i],
+            color=ft.colors[i],
+            label=ft.houses[i],
             alpha=0.4,
-            edgecolor=colors[i],
+            edgecolor=ft.colors[i],
             linewidth=1.0,
         )
     axes.legend(loc="upper right")
