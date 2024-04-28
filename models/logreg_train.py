@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 from models import GradientDescent as GD
 from libft import check_input
 import sys
@@ -25,7 +24,11 @@ def label_data(data: pd.DataFrame, label: str) -> pd.DataFrame:
 
 def main():
     data = check_input(sys.argv, 0)
-    data = data.dropna()
+    data = data.fillna(0)
+    # numerical_columns = data.select_dtypes(include=["number"])
+    # data[numerical_columns.columns] = numerical_columns.fillna(
+    #     numerical_columns.median()
+    # )
     coefs = pd.DataFrame(
         columns=[
             "Gryffindor",

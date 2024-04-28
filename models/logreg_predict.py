@@ -27,8 +27,8 @@ def load_coefs() -> pd.DataFrame:
     except Exception:
         coefs = {
             "Gryffindor": [0.0, 0.0, 0.0, 0.0],
-            "Slytherin": [0.0, 0.0],
-            "Ravenclaw": [0.0, 0.0, 0.0],
+            "Slytherin": [0.0, 0.0, np.nan, np.nan],
+            "Ravenclaw": [0.0, 0.0, 0.0, np.nan],
             "Hufflepuff": [0.0, 0.0, 0.0, 0.0],
         }
         return pd.DataFrame(coefs)
@@ -56,7 +56,8 @@ def write_result(probs):
 
 
 def main():
-    data = ft.check_input(sys.argv, 0).dropna()
+    data = ft.check_input(sys.argv, 0)
+    data = data.fillna(0)
     coefs = load_coefs()
     probs = calculate_probs(data, coefs)
     write_result(probs.T)
