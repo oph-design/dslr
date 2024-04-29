@@ -20,7 +20,7 @@ class GradientDescent:
         return 1 / (1 + np.exp(scores * -1))
 
     def _train(self):
-        for i in tqdm(range(self.epochs), desc=self.house, ncols=100, ascii=True):
+        for i in tqdm(range(self.epochs), desc=self.house, ncols=80, ascii=True):
             predict = self._predict()
             cost_c = (1 / self.n) * np.sum(predict - self.y)
             self.c = self.c - self.l * cost_c

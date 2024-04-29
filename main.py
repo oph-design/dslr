@@ -3,7 +3,7 @@ import subprocess
 BLUE = "\033[94m"
 DEF = "\033[0m"
 
-programs = ["histogram", "scatter_plot", "pairplot", "describe", "train", "predict"]
+programs = ["histogram", "scatter_plot", "pair_plot", "describe", "train", "predict"]
 
 
 def main():
@@ -15,7 +15,7 @@ def main():
             + f"scatterplot | pairplot | train | predict:{DEF} "
         )
     if program == "train" or program == "predict":
-        program = "models/logreg_" + program
+        program = "model/logreg_" + program
     else:
         program = "visuals/" + program
     execution.append(program + ".py")
@@ -31,6 +31,7 @@ def main():
         feature = input(f"{BLUE}Enter a feature to compare to:{DEF} ")
         if feature != "":
             execution.append(feature)
+    print(f"{BLUE}Executing {program} please stay patient ...{DEF}")
     subprocess.run(execution)
 
 
