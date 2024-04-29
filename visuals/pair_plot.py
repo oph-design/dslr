@@ -1,5 +1,5 @@
 import seaborn as sns
-from libft import check_input
+import libft as ft
 import matplotlib.pyplot as plt
 import sys
 
@@ -13,7 +13,7 @@ hue_colors = {
 
 def main() -> None:
     """main function"""
-    data = check_input(sys.argv, 0)
+    data = ft.check_input(sys.argv, 0)
     plt.rcParams.update({"font.size": 6})
     pair = sns.pairplot(
         data,
