@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from data_loader import check_input, load_coefs
 import sys
 
@@ -6,9 +7,21 @@ GREEN = "\033[92m"
 DEF = "\033[0m"
 
 houses = {
-    "Gryffindor": ["Flying", "Transfiguration", "History of Magic"],
-    "Slytherin": ["Divination"],
-    "Ravenclaw": ["Muggle Studies", "Charms"],
+    "Gryffindor": [
+        "Ancient Runes",
+        "Defense Against the Dark Arts",
+        "Herbology",
+    ],
+    "Slytherin": [
+        "Ancient Runes",
+        "Defense Against the Dark Arts",
+        "Herbology",
+    ],
+    "Ravenclaw": [
+        "Ancient Runes",
+        "Defense Against the Dark Arts",
+        "Herbology",
+    ],
     "Hufflepuff": [
         "Ancient Runes",
         "Defense Against the Dark Arts",
@@ -40,7 +53,14 @@ def write_result(probs):
 
 def main():
     data = check_input(sys.argv, 0)
-    data = data.fillna(0)
+    # data = data.fillna(0)
+    numeric_columns = data.select_dtypes(include=["number"])
+    means = numeric_columns.mean()
+    stds = numeric_columns.std()
+    normalized_numeric_df = (numeric_columns - means) / stds
+    data = pd.concat(
+        [normalized_numeric_df, data.select_dtypes(exclude=["number"])], axis=1
+    )
     coefs = load_coefs()
     probs = calculate_probs(data, coefs)
     write_result(probs.T)

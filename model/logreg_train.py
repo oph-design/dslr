@@ -7,9 +7,24 @@ GREEN = "\033[92m"
 DEF = "\033[0m"
 
 houses = {
-    "Gryffindor": ["Hogwarts House", "Flying", "Transfiguration", "History of Magic"],
-    "Slytherin": ["Hogwarts House", "Divination"],
-    "Ravenclaw": ["Hogwarts House", "Muggle Studies", "Charms"],
+    "Gryffindor": [
+        "Hogwarts House",
+        "Ancient Runes",
+        "Defense Against the Dark Arts",
+        "Herbology",
+    ],
+    "Slytherin": [
+        "Hogwarts House",
+        "Ancient Runes",
+        "Defense Against the Dark Arts",
+        "Herbology",
+    ],
+    "Ravenclaw": [
+        "Hogwarts House",
+        "Ancient Runes",
+        "Defense Against the Dark Arts",
+        "Herbology",
+    ],
     "Hufflepuff": [
         "Hogwarts House",
         "Ancient Runes",
@@ -27,11 +42,16 @@ def label_data(data: pd.DataFrame, label: str) -> pd.DataFrame:
 
 def main():
     data = check_input(sys.argv, 0)
-    data = data.fillna(0)
+    # data = data.fillna(0)
     # numerical_columns = data.select_dtypes(include=["number"])
     # data[numerical_columns.columns] = numerical_columns.fillna(
     #     numerical_columns.median()
-    # )
+    numeric_columns = data.select_dtypes(include=['number'])
+    means = numeric_columns.mean()
+    stds = numeric_columns.std()
+    normalized_numeric_df = (numeric_columns - means) / stds
+    data = pd.concat([normalized_numeric_df, data.select_dtypes(exclude=['number'])], axis=1)
+    print(data)
     coefs = pd.DataFrame(
         columns=[
             "Gryffindor",
