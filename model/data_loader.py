@@ -6,6 +6,13 @@ import sys
 RED = "\033[91m"
 DEF = "\033[0m"
 
+houses = ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"]
+features = [
+    "Ancient Runes",
+    "Defense Against the Dark Arts",
+    "Herbology",
+]
+
 
 def load_coefs() -> pd.DataFrame:
     try:
@@ -52,3 +59,13 @@ def check_input(argv: list, argc: int) -> pd.DataFrame:
             file=sys.stderr,
         )
         exit(1)
+
+
+def format_data(data: pd.DataFrame):
+    data = data.loc[:, features]
+    numeric_columns = data.select_dtypes(include=["number"])
+    means = numeric_columns.mean()
+    stds = numeric_columns.std()
+    normalized_numeric_df = (numeric_columns - means) / stds
+    data = pd.DataFrame(normalized_numeric_df)
+    return data.fillna(0)
