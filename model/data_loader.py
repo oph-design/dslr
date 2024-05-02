@@ -24,8 +24,8 @@ def load_coefs() -> pd.DataFrame:
     except Exception:
         coefs = {
             "Gryffindor": [0.0, 0.0, 0.0, 0.0],
-            "Slytherin": [0.0, 0.0, np.nan, np.nan],
-            "Ravenclaw": [0.0, 0.0, 0.0, np.nan],
+            "Slytherin": [0.0, 0.0, 0.0, 0.0],
+            "Ravenclaw": [0.0, 0.0, 0.0, 0.0],
             "Hufflepuff": [0.0, 0.0, 0.0, 0.0],
         }
         return pd.DataFrame(coefs)
