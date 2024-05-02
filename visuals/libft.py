@@ -1,3 +1,4 @@
+from collections import Counter
 import pandas as pd
 import numpy as np
 import math
@@ -21,11 +22,16 @@ def mean(feature: np.ndarray):
     return np.sum(feature) / count(feature)
 
 
-def std(feature: np.ndarray):
-    """returns array std deviation"""
+def variance(feature: np.ndarray):
+    """returns arrays variance"""
     dev = feature - mean(feature)
     sqsum = np.sum(np.power(dev, 2))
-    return math.sqrt(sqsum / count(feature))
+    return sqsum / (count(feature) - 1)
+
+
+def std(feature: np.ndarray):
+    """returns array std deviation"""
+    return math.sqrt(variance(feature))
 
 
 def min(feature: np.ndarray):
@@ -46,6 +52,8 @@ def percentile(feature: np.ndarray, percentile: float):
         raise Exception("percentile not between 0 and 1")
     sorted = np.sort(feature)
     pos = int(count(sorted) * percentile)
+    if count(sorted) % 2 == 0:
+        return (sorted[pos] + sorted[pos - 1]) / 2
     return sorted[pos]
 
 

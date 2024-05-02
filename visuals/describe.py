@@ -4,6 +4,20 @@ import pandas as pd
 import libft as ft
 
 
+rows = [
+    "Count",
+    "Mean",
+    "Median",
+    "Std",
+    "Variance",
+    "Min",
+    "25%",
+    "50%",
+    "75%",
+    "Max",
+]
+
+
 def transform(feature: np.ndarray) -> np.ndarray | None:
     """returns array with data values"""
     if feature.dtype != np.int64 and feature.dtype != np.float64:
@@ -15,7 +29,9 @@ def transform(feature: np.ndarray) -> np.ndarray | None:
         [
             ft.count(feature),
             ft.mean(feature),
+            ft.percentile(feature, 0.5),
             ft.std(feature),
+            ft.variance(feature),
             ft.min(feature),
             ft.percentile(feature, 0.25),
             ft.percentile(feature, 0.5),
@@ -27,7 +43,6 @@ def transform(feature: np.ndarray) -> np.ndarray | None:
 
 def ft_describe(data: pd.DataFrame) -> None:
     """prints description grid"""
-    rows = ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"]
     df = pd.DataFrame({"": rows})
     columns = list(data.columns)
     for i in range(data.shape[1]):
