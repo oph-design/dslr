@@ -6,11 +6,13 @@ import pandas as pd
 class MiniBatch(GradientDescent):
 
     def __init__(self, data: pd.DataFrame, house: str):
+        """constructor"""
         super().__init__(data, house)
         self.defaultx = self.x
         self.defaulty = self.y
 
-    def _update_sample(self):
+    def _update_sample(self) -> None:
+        """chooses sample batch randomly"""
         self.x = []
         self.y = []
         for i in range(self.n // 100):
@@ -21,6 +23,7 @@ class MiniBatch(GradientDescent):
         self.y = np.array(self.y)
 
     def _predict(self) -> np.ndarray:
+        """returns prediction array for the current iteration"""
         self._update_sample()
         scores = self.c + np.sum(self.m * self.x, axis=1)
         return 1 / (1 + np.exp(scores * -1))

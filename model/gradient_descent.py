@@ -6,6 +6,7 @@ from tqdm import tqdm
 class GradientDescent:
 
     def __init__(self, data: pd.DataFrame, house: str):
+        """constructor"""
         self.house = house
         self.c = 0.0
         self.y = np.array(data.iloc[:, 0], dtype=np.float128)
@@ -16,10 +17,12 @@ class GradientDescent:
         self.epochs = 10000
 
     def _predict(self) -> np.ndarray:
+        """returns prediction array for the current iteration"""
         scores = self.c + np.sum(self.m * self.x, axis=1)
         return 1 / (1 + np.exp(scores * -1))
 
-    def _train(self):
+    def _train(self) -> np.ndarray:
+        """trains model for the 'epochs' of times"""
         for i in tqdm(range(self.epochs), desc=self.house, ncols=80, ascii=True):
             predict = self._predict()
             cost_c = (1 / self.n) * np.sum(predict - self.y)

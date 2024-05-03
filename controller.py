@@ -14,7 +14,7 @@ programs = [
 ]
 
 
-def main():
+def main() -> None:
     execution = ["python3"]
     command = input(f"{BLUE}Enter the program you want to run:{DEF} ")
     while command not in commands:

@@ -12,7 +12,8 @@ DEF = "\033[0m"
 algorithms = ["classic", "stochastic", "mini-batch"]
 
 
-def choose_algo(id: str, data: pd.DataFrame, house: str):
+def choose_algo(id: str, data: pd.DataFrame, house: str) -> GD:
+    """selects alogorithm based on input"""
     if id not in algorithms:
         print(f"{RED}Wrong algorithm you need to enter: {algorithms}{DEF}")
         exit(1)
@@ -24,12 +25,14 @@ def choose_algo(id: str, data: pd.DataFrame, house: str):
 
 
 def label_data(data: pd.DataFrame, label: str) -> pd.DataFrame:
+    """swapes house values out for 1s and 0s"""
     res = data.copy()
     res["Hogwarts House"] = (res["Hogwarts House"] == label).astype(int)
     return res
 
 
-def main():
+def main() -> None:
+    """main function"""
     algorithm = "classic"
     if len(sys.argv) > 2:
         algorithm = sys.argv[2]
