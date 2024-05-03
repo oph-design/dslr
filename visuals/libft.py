@@ -1,4 +1,3 @@
-from collections import Counter
 import pandas as pd
 import numpy as np
 import math
@@ -20,6 +19,20 @@ def count(feature: np.ndarray):
 def mean(feature: np.ndarray):
     """returns array mean"""
     return np.sum(feature) / count(feature)
+
+
+def mode(feature: np.ndarray):
+    """returns array mode"""
+    values = []
+    counts = []
+    for value in feature:
+        if values not in values:
+            values.append(value)
+            counts.append(1)
+        else:
+            counts[values.index(values)] += 1
+    max_count = max(np.array(counts))
+    return values[counts.index(max_count)]
 
 
 def variance(feature: np.ndarray):
@@ -51,9 +64,9 @@ def percentile(feature: np.ndarray, percentile: float):
     if percentile < 0.0 and percentile > 1.0:
         raise Exception("percentile not between 0 and 1")
     sorted = np.sort(feature)
-    pos = int(count(sorted) * percentile)
-    if count(sorted) % 2 == 0:
-        return (sorted[pos] + sorted[pos - 1]) / 2
+    pos = math.floor(count(sorted) * percentile)
+    if percentile > 0.5:
+        pos += 1
     return sorted[pos]
 
 
