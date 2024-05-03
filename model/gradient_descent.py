@@ -13,7 +13,7 @@ class GradientDescent:
         self.m = np.zeros(self.x.shape[1])
         self.n = len(self.y)
         self.l = 0.001
-        self.epochs = 12000
+        self.epochs = 10000
 
     def _predict(self) -> np.ndarray:
         scores = self.c + np.sum(self.m * self.x, axis=1)
@@ -24,8 +24,7 @@ class GradientDescent:
             predict = self._predict()
             cost_c = (1 / self.n) * np.sum(predict - self.y)
             self.c = self.c - self.l * cost_c
-            for j in range(self.x.shape[1]):
+            for j in range(len(self.m)):
                 cost_m = (1 / self.n) * np.sum((predict - self.y) * self.x.T[j])
                 self.m[j] = self.m[j] - self.l * cost_m
         return np.insert(self.m, 0, self.c)
-

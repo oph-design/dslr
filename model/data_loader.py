@@ -39,13 +39,6 @@ def checker(argv: list, argc: int) -> pd.DataFrame:
     columns = list(data.columns)
     if len(columns) < 6 + argc:
         raise Exception("CSV has not enough features")
-    for i in range(argc):
-        if i + 2 >= len(argv):
-            break
-        try:
-            columns.index(argv[i + 2])
-        except ValueError:
-            raise Exception("Feature(s) not found in data")
     return data
 
 

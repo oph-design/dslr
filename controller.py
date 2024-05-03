@@ -33,6 +33,10 @@ def main():
         feature = input(f"{BLUE}Enter a feature to compare to:{DEF} ")
         if feature != "":
             execution.append(feature)
+    if program == programs[4]:
+        feature = input(f"{BLUE}Enter a an optimization alogrithm:{DEF} ")
+        if feature != "":
+            execution.append(feature)
     print(f"{BLUE}Executing {program} please stay patient ...{DEF}")
     subprocess.run(execution)
 
