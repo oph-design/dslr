@@ -1,10 +1,14 @@
 from data_loader import check_input, load_coefs, format_data, houses
+from logreg_train import label_data
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import sys
 
 GREEN = "\033[92m"
 DEF = "\033[0m"
+
+colors = ["red", "green", "blue", "orange"]
 
 
 def calculate_probs(data: np.ndarray, coefs: pd.DataFrame) -> np.ndarray:
@@ -30,13 +34,28 @@ def write_result(probs: np.ndarray) -> None:
     print(f'{GREEN}Prediction Complete! Data written in "houses.csv"{DEF}')
 
 
+def draw_graphs(data: pd.DataFrame, probs: np.ndarray) -> None:
+    fig = plt.figure(figsize=(12, 6))
+    for index, house in enumerate(houses):
+        axes = fig.add_subplot(2, 2, index + 1)
+        y = np.sort(label_data(data, house).iloc[:, 0])
+        x = np.arange(0, len(y))
+        axes.scatter(x, y, marker=".", color=colors[index])
+        axes.plot(x, np.sort(probs[index]), color="k", linestyle=":")
+        axes.set_title(house)
+    plt.tight_layout()
+    plt.show()
+
+
 def main() -> None:
     """main function"""
     data = check_input(sys.argv, 0)
+    house_data = data["Hogwarts House"]
     data = format_data(data)
     coefs = load_coefs()
     probs = calculate_probs(np.array(data), coefs)
     write_result(probs.T)
+    draw_graphs(pd.concat([house_data, data], axis=1), probs)
 
 
 if __name__ == "__main__":
