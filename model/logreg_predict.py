@@ -1,3 +1,4 @@
+from matplotlib.lines import lineStyles
 from data_loader import check_input, load_coefs, format_data, houses
 from logreg_train import label_data
 import matplotlib.pyplot as plt
@@ -9,6 +10,7 @@ GREEN = "\033[92m"
 DEF = "\033[0m"
 
 colors = ["red", "green", "blue", "orange"]
+graphs = ["lightcoral", "palegreen", "lightsteelblue", "navajowhite"]
 
 
 def calculate_probs(data: np.ndarray, coefs: pd.DataFrame) -> np.ndarray:
@@ -40,8 +42,9 @@ def draw_graphs(data: pd.DataFrame, probs: np.ndarray) -> None:
         axes = fig.add_subplot(2, 2, index + 1)
         y = np.sort(label_data(data, house).iloc[:, 0])
         x = np.arange(0, len(y))
-        axes.scatter(x, y, marker=".", color=colors[index])
-        axes.plot(x, np.sort(probs[index]), color="k", linestyle=":")
+        axes.scatter(x, y, marker=".", color=colors[index], zorder=2)
+        axes.plot(x, np.sort(probs[index]), color=graphs[index], zorder=1)
+        axes.grid(visible=True, linestyle="--", zorder=0)
         axes.set_title(house)
     plt.tight_layout()
     plt.show()
