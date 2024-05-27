@@ -74,7 +74,7 @@ After, you have to clone the repository and install the libraries used in this p
    git clone https://github.com/oph-design/ft_linear_regression
    pip3 install -r requirements.txt
   ```
-
+⚠️The recommended Python version is 3.11.5
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -89,12 +89,12 @@ To make is more comfortable the program `controller.py` was added to provide a c
 Following is a list of the programs and their arguments:
 | Program    | ARG1 | ARG2 | ARG3 |
 | -------- | ------- | ------- | ------- |
-| `describe.py`  | Path to Dataset |||
-| `histogram.py` | Path to Dataset | Subject to show (shows all if empty) ||
+| `describe.py`  | Path to Dataset |-|-|
+| `histogram.py` | Path to Dataset | Subject to show (shows all if empty) |-|
 | `scatter_plot.py`   | Path to Dataset | Subject to show  | Subject to compare too |
-| `pair_plot.py`   | Path to Dataset |||
-| `logreg_train.py`   | Path to Dataset  | Optimisation algorithm (GD, stochastic GD, mini-batch GD)||
-| `logreg_predict.py`   | Path to Dataset  |||
+| `pair_plot.py`   | Path to Dataset |-|-|
+| `logreg_train.py`   | Path to Dataset  | Optimisation algorithm (GD, stochastic GD, mini-batch GD)|-|
+| `logreg_predict.py`   | Path to Dataset  |-|-|
 
 
 
