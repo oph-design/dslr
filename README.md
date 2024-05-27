@@ -80,9 +80,9 @@ After, you have to clone the repository and install the libraries used in this p
 ## Usage
 
 You can start each program from the below list by typing `python3` and the path to the program.
-It is recommended to start each program from the root of the repository to avoid pathing issue.
-To make is more comfortable the program `controller.py` was added to provide a cli for starting the program.
-`controller.py` takes as first input the program you want to use and ask for further input, using a default value if ypu keep the prompt blank.
+It is recommended to start each program from the root of the repository to avoid pathing issue s.
+To make it more comfortable the program `controller.py` was added to provide a cli for starting the program.
+`controller.py` takes as first input the program you want to use and asks for further input, using a default value if you keep the prompt blank.
    ```sh
    pyhton3 controller.py
    ```
